@@ -5,8 +5,8 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-
 import javax.swing.*;
+import static com.codifryed.PrimeFactoring.*;
 
 public class DisplayMain {
 	private JFrame mainFrame;
@@ -28,6 +28,26 @@ public class DisplayMain {
 
 		System.out.println();
 		System.out.println("Hello");
+	}
+
+	private class ButtonClickListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String command = e.getActionCommand();
+
+			if (command.equals("1")) {
+				statusLabel.setText("Single Thread processing...");
+				threadedFactoring(1);
+				
+			} else if (command.equals("2")) {
+				statusLabel.setText("Double Thread processing...");
+				
+			} else if (command.equals("4")) {
+				statusLabel.setText("Quad Thread processing...");
+			}
+			else {
+				throw new IllegalArgumentException("Button pushed that doesn't exist");
+			}
+		}
 	}
 
 	private void showConsole() {
@@ -104,20 +124,6 @@ public class DisplayMain {
 
 		mainFrame.setVisible(true);
 
-	}
-
-	private class ButtonClickListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			String command = e.getActionCommand();
-
-			if (command.equals("OK")) {
-				statusLabel.setText("Ok Button clicked.");
-			} else if (command.equals("Submit")) {
-				statusLabel.setText("Submit Button clicked.");
-			} else {
-				statusLabel.setText("Cancel Button clicked.");
-			}
-		}
 	}
 
 	// The following codes set where the text get redirected. In this case,
